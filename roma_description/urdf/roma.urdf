@@ -1,0 +1,345 @@
+<robot name="roma" version="1.0">
+  <joint name="cgo3_vertical_arm_remeshed_v1.001_link_joint" type="revolute">
+    <limit lower="-3.1400" upper="3.1400" effort="0.0000" velocity="0.0000"/>
+    <origin rpy="0.0000 0.0000 0.0000" xyz="-0.0896 0.0000 -0.0056"/>
+    <parent link="node29.004_link"/>
+    <child link="cgo3_vertical_arm_remeshed_v1.001_link"/>
+    <axis xyz="0.0000 0.0000 1.0000"/>
+  </joint>
+  <joint name="cgo3_horizontal_arm_remeshed_v1.002_link_joint" type="revolute">
+    <limit lower="-3.1400" upper="3.1400" effort="0.0000" velocity="0.0000"/>
+    <origin rpy="-0.0000 1.5708 -0.0000" xyz="-0.0437 0.0010 0.0469"/>
+    <parent link="cgo3_vertical_arm_remeshed_v1.001_link"/>
+    <child link="cgo3_horizontal_arm_remeshed_v1.002_link"/>
+    <axis xyz="0.0000 0.0000 1.0000"/>
+  </joint>
+  <joint name="node131.009_link_joint" type="continuous">
+    <limit effort="0.0000" velocity="0.0000"/>
+    <origin rpy="-0.0000 -0.0000 -0.0000" xyz="-0.0655 0.0002 0.0488"/>
+    <parent link="node131.017_link"/>
+    <child link="node131.009_link"/>
+    <axis xyz="0.0000 0.0000 -1.0000"/>
+  </joint>
+  <joint name="cgo3_camera_remeshed_v1_link_joint" type="revolute">
+    <limit lower="-3.1400" upper="3.1400" effort="0.0000" velocity="0.0000"/>
+    <origin rpy="1.9752 -1.5708 -0.4044" xyz="0.0002 -0.0010 -0.0469"/>
+    <parent link="cgo3_horizontal_arm_remeshed_v1.002_link"/>
+    <child link="cgo3_camera_remeshed_v1_link"/>
+    <axis xyz="0.0000 0.0000 1.0000"/>
+  </joint>
+  <joint name="node131.002_link_joint" type="revolute">
+    <limit lower="-3.1400" upper="3.1400" effort="0.0000" velocity="0.0000"/>
+    <origin rpy="-1.5708 0.0000 0.0000" xyz="0.0476 0.0521 -0.0565"/>
+    <parent link="node29.004_link"/>
+    <child link="node131.002_link"/>
+    <axis xyz="0.0000 0.0000 -1.0000"/>
+  </joint>
+  <joint name="node131_link_joint" type="continuous">
+    <limit effort="0.0000" velocity="0.0000"/>
+    <origin rpy="-0.0000 0.0000 0.0000" xyz="0.0655 -0.0000 0.0483"/>
+    <parent link="node131.002_link"/>
+    <child link="node131_link"/>
+    <axis xyz="0.0000 0.0000 -1.0000"/>
+  </joint>
+  <joint name="node131.003_link_joint" type="revolute">
+    <limit lower="-3.1400" upper="3.1400" effort="0.0000" velocity="0.0000"/>
+    <origin rpy="1.5708 0.0000 -0.0000" xyz="0.0476 -0.0522 -0.0565"/>
+    <parent link="node29.004_link"/>
+    <child link="node131.003_link"/>
+    <axis xyz="0.0000 0.0000 1.0000"/>
+  </joint>
+  <joint name="node131.012_link_joint" type="continuous">
+    <limit effort="0.0000" velocity="0.0000"/>
+    <origin rpy="0.0000 0.0000 -0.0000" xyz="0.0656 0.0001 0.0488"/>
+    <parent link="node131.003_link"/>
+    <child link="node131.012_link"/>
+    <axis xyz="0.0000 0.0000 1.0000"/>
+  </joint>
+  <joint name="node131.010_link_joint" type="revolute">
+    <limit lower="-3.1400" upper="3.1400" effort="0.0000" velocity="0.0000"/>
+    <origin rpy="1.5708 0.0000 -0.0000" xyz="-0.0479 -0.0522 -0.0565"/>
+    <parent link="node29.004_link"/>
+    <child link="node131.010_link"/>
+    <axis xyz="0.0000 0.0000 1.0000"/>
+  </joint>
+  <joint name="node131.011_link_joint" type="continuous">
+    <limit effort="0.0000" velocity="0.0000"/>
+    <origin rpy="0.0000 0.0000 0.0000" xyz="-0.0655 -0.0002 0.0488"/>
+    <parent link="node131.010_link"/>
+    <child link="node131.011_link"/>
+    <axis xyz="0.0000 0.0000 1.0000"/>
+  </joint>
+  <joint name="node131.017_link_joint" type="revolute">
+    <limit lower="-3.1400" upper="3.1400" effort="0.0000" velocity="0.0000"/>
+    <origin rpy="-1.5708 0.0000 -0.0000" xyz="-0.0479 0.0522 -0.0565"/>
+    <parent link="node29.004_link"/>
+    <child link="node131.017_link"/>
+    <axis xyz="0.0000 0.0000 -1.0000"/>
+  </joint>
+  <link name="node29.004_link">
+    <collision name="node29.004_collision">
+      <origin rpy="0.0000 0.0000 0.0000" xyz="0.0000 0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature001.010.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0018" ixy="0.0000" ixz="-0.0007" iyy="0.0027" iyz="0.0000" izz="0.0015"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="0.0134 0.0001 0.0060"/>
+      <mass value="0.5000"/>
+    </inertial>
+    <visual name="node29.004">
+      <material name="Part__Feature001.011"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="0.0000 0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature001.010.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="cgo3_vertical_arm_remeshed_v1.001_link">
+    <collision name="cgo3_vertical_arm_remeshed_v1.001_collision">
+      <origin rpy="0.0000 0.0000 0.0000" xyz="0.0000 -0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/cgo3_vertical_arm_remeshed_v1.001.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0000" ixy="-0.0000" ixz="0.0000" iyy="0.0000" iyz="0.0000" izz="0.0000"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="-0.0236 -0.0000 0.0190"/>
+      <mass value="0.0200"/>
+    </inertial>
+    <visual name="cgo3_vertical_arm_remeshed_v1.001">
+      <material name="Material.003"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="0.0000 -0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/cgo3_vertical_arm_remeshed_v1.001.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="node131.017_link">
+    <collision name="node131.017_collision">
+      <origin rpy="1.5708 0.0000 0.0000" xyz="0.0000 -0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.026.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0001" ixy="-0.0000" ixz="0.0000" iyy="0.0002" iyz="0.0000" izz="0.0002"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="-0.0535 -0.0008 0.0076"/>
+      <mass value="0.2000"/>
+    </inertial>
+    <visual name="node131.017">
+      <material name="purple"/>
+      <origin rpy="1.5708 0.0000 -0.0000" xyz="0.0000 -0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.026.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="node131.009_link">
+    <collision name="node131.009_collision">
+      <origin rpy="1.5708 0.0000 0.0000" xyz="-0.0001 -0.0002 0.0048"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.005.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0000" ixy="0.0000" ixz="0.0000" iyy="0.0000" iyz="-0.0000" izz="0.0000"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="0.0002 -0.0002 0.0048"/>
+      <mass value="0.0400"/>
+    </inertial>
+    <visual name="node131.009">
+      <material name="bones.001"/>
+      <origin rpy="1.5708 0.0000 0.0000" xyz="-0.0001 -0.0002 0.0048"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.005.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="cgo3_horizontal_arm_remeshed_v1.002_link">
+    <collision name="cgo3_horizontal_arm_remeshed_v1.002_collision">
+      <origin rpy="0.2104 -1.5708 -0.2104" xyz="0.0000 -0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/cgo3_horizontal_arm_remeshed_v1.001.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0000" ixy="-0.0000" ixz="-0.0000" iyy="0.0000" iyz="0.0000" izz="0.0000"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="0.0002 -0.0000 -0.0287"/>
+      <mass value="0.0100"/>
+    </inertial>
+    <visual name="cgo3_horizontal_arm_remeshed_v1.002">
+      <material name="green"/>
+      <origin rpy="0.6040 -1.5708 -0.6040" xyz="0.0000 -0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/cgo3_horizontal_arm_remeshed_v1.001.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="cgo3_camera_remeshed_v1_link">
+    <collision name="cgo3_camera_remeshed_v1_collision">
+      <origin rpy="-1.5708 0.0000 0.0000" xyz="0.0000 -0.0000 -0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/cgo3_camera_remeshed_v1.002.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0000" ixy="-0.0000" ixz="-0.0000" iyy="0.0000" iyz="-0.0000" izz="0.0000"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="-0.0042 0.0007 -0.0009"/>
+      <mass value="0.1000"/>
+    </inertial>
+    <visual name="cgo3_camera_remeshed_v1">
+      <material name="Material.001"/>
+      <origin rpy="-1.5708 0.0000 0.0000" xyz="0.0000 -0.0000 -0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/cgo3_camera_remeshed_v1.002.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="node131.002_link">
+    <collision name="node131.002_collision">
+      <origin rpy="1.5708 0.0000 0.0000" xyz="-0.0000 -0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.027.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0001" ixy="0.0000" ixz="-0.0000" iyy="0.0002" iyz="0.0000" izz="0.0002"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="0.0535 -0.0008 0.0073"/>
+      <mass value="0.2000"/>
+    </inertial>
+    <visual name="node131.002">
+      <material name="purple"/>
+      <origin rpy="1.5708 0.0000 0.0000" xyz="-0.0000 -0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.027.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="node131_link">
+    <collision name="node131_collision">
+      <origin rpy="1.5708 0.0000 0.0000" xyz="0.0001 -0.0000 -0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.001.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0000" ixy="-0.0000" ixz="-0.0000" iyy="0.0000" iyz="-0.0000" izz="0.0000"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="0.0002 0.0000 0.0047"/>
+      <mass value="0.0400"/>
+    </inertial>
+    <visual name="node131">
+      <material name="wheels_material"/>
+      <origin rpy="1.5708 0.0000 0.0000" xyz="0.0001 -0.0000 -0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.001.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="node131.003_link">
+    <collision name="node131.003_collision">
+      <origin rpy="-1.5708 0.0000 -0.0000" xyz="-0.0000 0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.028.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0001" ixy="-0.0000" ixz="-0.0000" iyy="0.0002" iyz="-0.0000" izz="0.0002"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="0.0535 0.0008 0.0076"/>
+      <mass value="0.2000"/>
+    </inertial>
+    <visual name="node131.003">
+      <material name="purple"/>
+      <origin rpy="-1.5708 0.0000 0.0000" xyz="-0.0000 0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.028.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="node131.012_link">
+    <collision name="node131.012_collision">
+      <origin rpy="-1.5708 0.0000 0.0000" xyz="0.0000 -0.0003 0.0053"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.020.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="node131.012">
+      <material name="Part__Feature074.001"/>
+      <origin rpy="-1.5708 0.0000 0.0000" xyz="0.0000 -0.0003 0.0053"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.020.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="node131.010_link">
+    <collision name="node131.010_collision">
+      <origin rpy="-1.5708 0.0000 0.0000" xyz="0.0000 0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.008.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0001" ixy="0.0000" ixz="0.0000" iyy="0.0002" iyz="-0.0000" izz="0.0002"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="-0.0535 0.0008 0.0076"/>
+      <mass value="0.2000"/>
+    </inertial>
+    <visual name="node131.004">
+      <material name="purple"/>
+      <origin rpy="-1.5708 0.0000 0.0000" xyz="0.0000 0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.087.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <visual name="node131.010">
+      <material name="purple"/>
+      <origin rpy="-1.5708 0.0000 0.0000" xyz="0.0000 0.0000 0.0000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.008.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="node131.011_link">
+    <collision name="node131.011_collision">
+      <origin rpy="-1.5708 0.0000 0.0000" xyz="-0.0001 0.0001 0.0053"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.019.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="0.0000" ixy="-0.0000" ixz="0.0000" iyy="0.0000" iyz="0.0000" izz="0.0000"/>
+      <origin rpy="0.0000 0.0000 0.0000" xyz="-0.0002 0.0004 0.0047"/>
+      <mass value="0.0400"/>
+    </inertial>
+    <visual name="node131.011">
+      <material name="Part__Feature074.001"/>
+      <origin rpy="-1.5708 0.0000 0.0000" xyz="-0.0001 0.0001 0.0053"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Part__Feature075.019.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <material name="Material.001">
+    <color rgba="0.1804 0.0000 0.0000 1.0000"/>
+  </material>
+  <material name="Material.003">
+    <color rgba="0.0000 0.0000 0.1098 1.0000"/>
+  </material>
+  <material name="Part__Feature001.011">
+    <color rgba="0.0000 0.5961 0.0078 1.0000"/>
+  </material>
+  <material name="Part__Feature074.001">
+    <color rgba="0.2941 0.2745 0.0000 1.0000"/>
+  </material>
+  <material name="bones.001">
+    <color rgba="0.0000 0.0000 0.0000 1.0000"/>
+  </material>
+  <material name="green">
+    <color rgba="0.0902 0.0000 0.0863 1.0000"/>
+  </material>
+  <material name="purple">
+    <color rgba="0.0314 0.0039 0.0275 1.0000"/>
+  </material>
+  <material name="wheels_material">
+    <color rgba="0.0000 0.0000 0.0000 1.0000"/>
+  </material>
+</robot>

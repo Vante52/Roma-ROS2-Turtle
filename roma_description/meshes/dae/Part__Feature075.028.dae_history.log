@@ -1,0 +1,5 @@
+Instantiated with filepath=None->None, scale=[1.0, 1.0, 1.0], mesh=<bpy_struct, Mesh("Part__Feature075.028") at 0x000001FBACD80120>, meshname=Part__Feature075.028, material=None, mesh_orientation=None
+manually setting mesh_object by value of <class 'bpy_types.Mesh'>
+apply_scale [1.0, 1.0, 1.0]
+->trying export of <bpy_struct, Mesh("Part__Feature075.135") at 0x000001FC8C007908> to C:\Users\ivanm\OneDrive\Documentos\Blender Projects\TurttleBotPet\roma\meshes\dae\Part__Feature075.028.dae
+->wrote dae to C:\Users\ivanm\OneDrive\Documentos\Blender Projects\TurttleBotPet\roma\meshes\dae\Part__Feature075.028.dae from bpy_types.Mesh
