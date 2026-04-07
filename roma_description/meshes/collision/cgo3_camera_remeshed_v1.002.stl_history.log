@@ -1,0 +1,5 @@
+Instantiated with filepath=None->None, scale=[1.0, 1.0, 1.0], mesh=<bpy_struct, Mesh("cgo3_camera_remeshed_v1.002") at 0x000001FBA4D70120>, meshname=cgo3_camera_remeshed_v1.002, material=None, mesh_orientation=None
+manually setting mesh_object by value of <class 'bpy_types.Mesh'>
+apply_scale [1.0, 1.0, 1.0]
+->trying export of <bpy_struct, Mesh("cgo3_camera_remeshed_v1.015") at 0x000001FCCE6B1D08> to C:\Users\ivanm\OneDrive\Documentos\Blender Projects\TurttleBotPet\roma\meshes\stl\cgo3_camera_remeshed_v1.002.stl
+->wrote stl to C:\Users\ivanm\OneDrive\Documentos\Blender Projects\TurttleBotPet\roma\meshes\stl\cgo3_camera_remeshed_v1.002.stl from bpy_types.Mesh
