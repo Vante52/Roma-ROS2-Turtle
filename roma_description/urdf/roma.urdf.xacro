@@ -62,7 +62,7 @@
   </xacro:macro>
 
 <!-- Links -->
-  <link name="base_link">
+  <link name="base_link"/>
 
   <link name="shell_link">
     <xacro:mesh_collision

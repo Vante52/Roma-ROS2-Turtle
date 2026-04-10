@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot name="roma">
-  <link name="base_link">
+  <link name="base_link"/>
 
   <joint name="base_to_body" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0"/>
