@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
 <robot name="roma" xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:include filename="$(find roma_description)/urdf/roma.urdf.xacro"/>
-    <xacro:include filename="$(find roma_gazebo)/urdf/robot_material_support.xacro"/>
+    <xacro:include filename="$(find-pkg-share roma_description)/urdf/roma.urdf.xacro"/>
 </robot>

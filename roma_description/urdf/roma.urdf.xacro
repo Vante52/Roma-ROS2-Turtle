@@ -1,347 +1,351 @@
 <?xml version="1.0"?>
 <robot name="roma" xmlns:xacro="http://www.ros.org/wiki/xacro">
-<!-- Properties -->
-  <xacro:property name="visual_mesh_dir" value="package://roma_description/meshes/visual"/>
-  <xacro:property name="collision_mesh_dir" value="package://roma_description/meshes/collision"/>
-  <xacro:property name="mesh_scale" value="1 1 1"/>
+  <!-- Properties -->
+  <!-- Mesh path configuration -->
+  <xacro:arg name="mesh_uri_prefix" default="package://roma_description" />
 
-<!-- Reusable macros -->
+  <xacro:property name="visual_mesh_dir" value="$(arg mesh_uri_prefix)/meshes/visual" />
+  <xacro:property name="collision_mesh_dir" value="$(arg mesh_uri_prefix)/meshes/collision" />
+  <xacro:property name="mesh_scale" value="1 1 1" />
+
+  <!-- Reusable macros -->
   <xacro:macro name="mesh_visual" params="name mesh material xyz rpy">
     <visual name="${name}">
-      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <origin xyz="${xyz}" rpy="${rpy}" />
       <geometry>
-        <mesh filename="${mesh}" scale="${mesh_scale}"/>
+        <mesh filename="${mesh}" scale="${mesh_scale}" />
       </geometry>
-      <material name="${material}"/>
+      <material name="${material}" />
     </visual>
   </xacro:macro>
 
   <xacro:macro name="mesh_collision" params="name mesh xyz rpy">
     <collision name="${name}">
-      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <origin xyz="${xyz}" rpy="${rpy}" />
       <geometry>
-        <mesh filename="${mesh}" scale="${mesh_scale}"/>
+        <mesh filename="${mesh}" scale="${mesh_scale}" />
       </geometry>
     </collision>
   </xacro:macro>
 
   <xacro:macro name="link_inertial" params="mass xyz rpy ixx ixy ixz iyy iyz izz">
     <inertial>
-      <origin xyz="${xyz}" rpy="${rpy}"/>
-      <mass value="${mass}"/>
-      <inertia ixx="${ixx}" ixy="${ixy}" ixz="${ixz}" iyy="${iyy}" iyz="${iyz}" izz="${izz}"/>
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <mass value="${mass}" />
+      <inertia ixx="${ixx}" ixy="${ixy}" ixz="${ixz}" iyy="${iyy}" iyz="${iyz}" izz="${izz}" />
     </inertial>
   </xacro:macro>
 
   <xacro:macro name="fixed_joint" params="name parent child xyz rpy">
     <joint name="${name}" type="fixed">
-      <origin xyz="${xyz}" rpy="${rpy}"/>
-      <parent link="${parent}"/>
-      <child link="${child}"/>
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}" />
+      <child link="${child}" />
     </joint>
   </xacro:macro>
 
-  <xacro:macro name="revolute_joint" params="name parent child xyz rpy axis lower upper effort velocity">
+  <xacro:macro name="revolute_joint"
+    params="name parent child xyz rpy axis lower upper effort velocity">
     <joint name="${name}" type="revolute">
-      <origin xyz="${xyz}" rpy="${rpy}"/>
-      <parent link="${parent}"/>
-      <child link="${child}"/>
-      <axis xyz="${axis}"/>
-      <limit lower="${lower}" upper="${upper}" effort="${effort}" velocity="${velocity}"/>
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}" />
+      <child link="${child}" />
+      <axis xyz="${axis}" />
+      <limit lower="${lower}" upper="${upper}" effort="${effort}" velocity="${velocity}" />
     </joint>
   </xacro:macro>
 
   <xacro:macro name="continuous_joint" params="name parent child xyz rpy axis effort velocity">
     <joint name="${name}" type="continuous">
-      <origin xyz="${xyz}" rpy="${rpy}"/>
-      <parent link="${parent}"/>
-      <child link="${child}"/>
-      <axis xyz="${axis}"/>
-      <limit effort="${effort}" velocity="${velocity}"/>
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}" />
+      <child link="${child}" />
+      <axis xyz="${axis}" />
+      <limit effort="${effort}" velocity="${velocity}" />
     </joint>
   </xacro:macro>
 
-<!-- Links -->
-  <link name="base_link"/>
+  <!-- Links -->
+  <link name="base_link" />
 
   <link name="shell_link">
     <xacro:mesh_collision
       name="shell_collision"
-      mesh="${visual_mesh_dir}/Part__Feature001.010.dae"
+      mesh="${collision_mesh_dir}/Part__Feature001.010.stl"
       xyz="0.0000 0.0000 0.0000"
-      rpy="0.0000 0.0000 0.0000"/>
+      rpy="0.0000 0.0000 0.0000" />
 
     <xacro:link_inertial
       mass="0.5000"
       xyz="0.0134 0.0001 0.0060"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0018" ixy="0.0000" ixz="-0.0007"
-      iyy="0.0027" iyz="0.0000" izz="0.0015"/>
+      iyy="0.0027" iyz="0.0000" izz="0.0015" />
 
     <xacro:mesh_visual
       name="shell"
       mesh="${visual_mesh_dir}/Part__Feature001.010.dae"
       material="Part__Feature001.011"
       xyz="0.0000 0.0000 0.0000"
-      rpy="0.0000 0.0000 0.0000"/>
+      rpy="0.0000 0.0000 0.0000" />
   </link>
 
   <link name="neck_link">
     <xacro:mesh_collision
       name="neck_collision"
-      mesh="${visual_mesh_dir}/cgo3_vertical_arm_remeshed_v1.001.dae"
+      mesh="${collision_mesh_dir}/cgo3_vertical_arm_remeshed_v1.001.stl"
       xyz="0.0000 -0.0000 0.0000"
-      rpy="0.0000 0.0000 0.0000"/>
+      rpy="0.0000 0.0000 0.0000" />
 
     <xacro:link_inertial
       mass="0.0200"
       xyz="-0.0236 -0.0000 0.0190"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0000043" ixy="0.0" ixz="0.0"
-      iyy="0.0000043" iyz="0.0" izz="0.0000003"/>
+      iyy="0.0000043" iyz="0.0" izz="0.0000003" />
 
     <xacro:mesh_visual
       name="neck"
       mesh="${visual_mesh_dir}/cgo3_vertical_arm_remeshed_v1.001.dae"
       material="Material.003"
       xyz="0.0000 -0.0000 0.0000"
-      rpy="0.0000 0.0000 0.0000"/>
+      rpy="0.0000 0.0000 0.0000" />
   </link>
 
   <link name="neck_holder_link">
     <xacro:mesh_collision
       name="neck_holder_collision"
-      mesh="${visual_mesh_dir}/cgo3_horizontal_arm_remeshed_v1.001.stl"
+      mesh="${collision_mesh_dir}/cgo3_horizontal_arm_remeshed_v1.001.stl"
       xyz="0.0000 -0.0000 0.0000"
-      rpy="0.2104 -1.5708 -0.2104"/>
+      rpy="0.2104 -1.5708 -0.2104" />
 
     <xacro:link_inertial
       mass="0.0100"
       xyz="0.0002 -0.0000 -0.0287"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0000031" ixy="0.0" ixz="0.0"
-      iyy="0.0000031" iyz="0.0" izz="0.0000001"/>
+      iyy="0.0000031" iyz="0.0" izz="0.0000001" />
 
     <xacro:mesh_visual
       name="neck_holder"
       mesh="${visual_mesh_dir}/cgo3_horizontal_arm_remeshed_v1.001.dae"
       material="green"
       xyz="0.0000 -0.0000 0.0000"
-      rpy="0.6040 -1.5708 -0.6040"/>
+      rpy="0.6040 -1.5708 -0.6040" />
   </link>
 
   <link name="camera_link">
     <xacro:mesh_collision
       name="camera_collision"
-      mesh="${visual_mesh_dir}/cgo3_camera_remeshed_v1.002.stl"
+      mesh="${collision_mesh_dir}/cgo3_camera_remeshed_v1.002.stl"
       xyz="0.0000 -0.0000 -0.0000"
-      rpy="-1.5708 0.0000 0.0000"/>
+      rpy="-1.5708 0.0000 0.0000" />
 
     <xacro:link_inertial
       mass="0.1000"
       xyz="-0.0042 0.0007 -0.0009"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0000150" ixy="0.0" ixz="0.0"
-      iyy="0.0000150" iyz="0.0" izz="0.0000150"/>
+      iyy="0.0000150" iyz="0.0" izz="0.0000150" />
 
     <xacro:mesh_visual
       name="camera"
       mesh="${visual_mesh_dir}/cgo3_camera_remeshed_v1.002.dae"
       material="Material.001"
       xyz="0.0000 -0.0000 -0.0000"
-      rpy="-1.5708 0.0000 0.0000"/>
+      rpy="-1.5708 0.0000 0.0000" />
   </link>
 
   <link name="feet_right_front_link">
     <xacro:mesh_collision
       name="feet_right_front_collision"
-      mesh="${visual_mesh_dir}/Part__Feature075.026.stl"
+      mesh="${collision_mesh_dir}/Part__Feature075.026.stl"
       xyz="0.0000 -0.0000 0.0000"
-      rpy="1.5708 0.0000 0.0000"/>
+      rpy="1.5708 0.0000 0.0000" />
 
     <xacro:link_inertial
       mass="0.2000"
       xyz="-0.0535 -0.0008 0.0076"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0001" ixy="-0.0000" ixz="0.0000"
-      iyy="0.0002" iyz="0.0000" izz="0.0002"/>
+      iyy="0.0002" iyz="0.0000" izz="0.0002" />
 
     <xacro:mesh_visual
       name="feet_right_front"
       mesh="${visual_mesh_dir}/Part__Feature075.026.dae"
       material="purple"
       xyz="0.0000 -0.0000 0.0000"
-      rpy="1.5708 0.0000 -0.0000"/>
+      rpy="1.5708 0.0000 -0.0000" />
   </link>
 
   <link name="wheel_right_front_link">
     <xacro:mesh_collision
       name="wheel_right_front_collision"
-      mesh="${visual_mesh_dir}/Part__Feature075.005.stl"
+      mesh="${collision_mesh_dir}/Part__Feature075.005.stl"
       xyz="-0.0001 -0.0002 0.0048"
-      rpy="1.5708 0.0000 0.0000"/>
+      rpy="1.5708 0.0000 0.0000" />
 
     <xacro:link_inertial
       mass="0.0400"
       xyz="0.0002 -0.0002 0.0048"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0000043" ixy="0.0" ixz="0.0"
-      iyy="0.0000043" iyz="0.0" izz="0.0000080"/>
+      iyy="0.0000043" iyz="0.0" izz="0.0000080" />
 
     <xacro:mesh_visual
       name="wheel_right_front"
       mesh="${visual_mesh_dir}/Part__Feature075.005.dae"
       material="bones.001"
       xyz="-0.0001 -0.0002 0.0048"
-      rpy="1.5708 0.0000 0.0000"/>
+      rpy="1.5708 0.0000 0.0000" />
   </link>
 
   <link name="feet_right_rear_link">
     <xacro:mesh_collision
       name="feet_right_rear_collision"
-      mesh="${visual_mesh_dir}/Part__Feature075.027.stl"
+      mesh="${collision_mesh_dir}/Part__Feature075.027.stl"
       xyz="-0.0000 -0.0000 0.0000"
-      rpy="1.5708 0.0000 0.0000"/>
+      rpy="1.5708 0.0000 0.0000" />
 
     <xacro:link_inertial
       mass="0.2000"
       xyz="0.0535 -0.0008 0.0073"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0001" ixy="0.0000" ixz="-0.0000"
-      iyy="0.0002" iyz="0.0000" izz="0.0002"/>
+      iyy="0.0002" iyz="0.0000" izz="0.0002" />
 
     <xacro:mesh_visual
       name="feet_right_rear"
       mesh="${visual_mesh_dir}/Part__Feature075.027.dae"
       material="purple"
       xyz="-0.0000 -0.0000 0.0000"
-      rpy="1.5708 0.0000 0.0000"/>
+      rpy="1.5708 0.0000 0.0000" />
   </link>
 
   <link name="wheel_right_rear_link">
     <xacro:mesh_collision
       name="wheel_right_rear_collision"
-      mesh="${visual_mesh_dir}/Part__Feature075.001.stl"
+      mesh="${collision_mesh_dir}/Part__Feature075.001.stl"
       xyz="0.0001 -0.0000 -0.0000"
-      rpy="1.5708 0.0000 0.0000"/>
+      rpy="1.5708 0.0000 0.0000" />
 
     <xacro:link_inertial
       mass="0.0400"
       xyz="0.0002 0.0000 0.0047"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0000043" ixy="0.0" ixz="0.0"
-      iyy="0.0000043" iyz="0.0" izz="0.0000080"/>
+      iyy="0.0000043" iyz="0.0" izz="0.0000080" />
 
     <xacro:mesh_visual
       name="wheel_right_rear"
       mesh="${visual_mesh_dir}/Part__Feature075.001.dae"
       material="wheels_material"
       xyz="0.0001 -0.0000 -0.0000"
-      rpy="1.5708 0.0000 0.0000"/>
+      rpy="1.5708 0.0000 0.0000" />
   </link>
 
   <link name="feet_left_rear_link">
     <xacro:mesh_collision
       name="feet_left_rear_collision"
-      mesh="${visual_mesh_dir}/Part__Feature075.028.stl"
+      mesh="${collision_mesh_dir}/Part__Feature075.028.stl"
       xyz="-0.0000 0.0000 0.0000"
-      rpy="-1.5708 0.0000 -0.0000"/>
+      rpy="-1.5708 0.0000 -0.0000" />
 
     <xacro:link_inertial
       mass="0.2000"
       xyz="0.0535 0.0008 0.0076"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0001" ixy="-0.0000" ixz="-0.0000"
-      iyy="0.0002" iyz="-0.0000" izz="0.0002"/>
+      iyy="0.0002" iyz="-0.0000" izz="0.0002" />
 
     <xacro:mesh_visual
       name="feet_left_rear"
       mesh="${visual_mesh_dir}/Part__Feature075.028.dae"
       material="purple"
       xyz="-0.0000 0.0000 0.0000"
-      rpy="-1.5708 0.0000 0.0000"/>
+      rpy="-1.5708 0.0000 0.0000" />
   </link>
 
   <link name="wheel_left_rear_link">
     <xacro:mesh_collision
       name="wheel_left_rear_collision"
-      mesh="${visual_mesh_dir}/Part__Feature075.020.stl"
+      mesh="${collision_mesh_dir}/Part__Feature075.020.stl"
       xyz="0.0000 -0.0003 0.0053"
-      rpy="-1.5708 0.0000 0.0000"/>
+      rpy="-1.5708 0.0000 0.0000" />
 
     <xacro:link_inertial
       mass="0.0400"
       xyz="0.0000 -0.0003 0.0053"
       rpy="0 0 0"
       ixx="0.0000043" ixy="0.0" ixz="0.0"
-      iyy="0.0000043" iyz="0.0" izz="0.0000080"/>
+      iyy="0.0000043" iyz="0.0" izz="0.0000080" />
 
     <xacro:mesh_visual
       name="wheel_left_rear"
       mesh="${visual_mesh_dir}/Part__Feature075.020.dae"
       material="Part__Feature074.001"
       xyz="0.0000 -0.0003 0.0053"
-      rpy="-1.5708 0.0000 0.0000"/>
+      rpy="-1.5708 0.0000 0.0000" />
   </link>
 
   <link name="feet_left_front_link">
     <xacro:mesh_collision
       name="feet_left_front_collision"
-      mesh="${visual_mesh_dir}/Part__Feature075.008.stl"
+      mesh="${collision_mesh_dir}/Part__Feature075.008.stl"
       xyz="0.0000 0.0000 0.0000"
-      rpy="-1.5708 0.0000 0.0000"/>
+      rpy="-1.5708 0.0000 0.0000" />
 
     <xacro:link_inertial
       mass="0.2000"
       xyz="-0.0535 0.0008 0.0076"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0001" ixy="0.0000" ixz="0.0000"
-      iyy="0.0002" iyz="-0.0000" izz="0.0002"/>
+      iyy="0.0002" iyz="-0.0000" izz="0.0002" />
 
     <xacro:mesh_visual
       name="node131.004"
       mesh="${visual_mesh_dir}/Part__Feature075.087.dae"
       material="purple"
       xyz="0.0000 0.0000 0.0000"
-      rpy="-1.5708 0.0000 0.0000"/>
+      rpy="-1.5708 0.0000 0.0000" />
 
     <xacro:mesh_visual
       name="feet_left_front"
       mesh="${visual_mesh_dir}/Part__Feature075.008.dae"
       material="purple"
       xyz="0.0000 0.0000 0.0000"
-      rpy="-1.5708 0.0000 0.0000"/>
+      rpy="-1.5708 0.0000 0.0000" />
   </link>
 
   <link name="wheel_left_front_link">
     <xacro:mesh_collision
       name="wheel_left_front_collision"
-      mesh="${visual_mesh_dir}/Part__Feature075.019.stl"
+      mesh="${collision_mesh_dir}/Part__Feature075.019.stl"
       xyz="-0.0001 0.0001 0.0053"
-      rpy="-1.5708 0.0000 0.0000"/>
+      rpy="-1.5708 0.0000 0.0000" />
 
     <xacro:link_inertial
       mass="0.0400"
       xyz="-0.0002 0.0004 0.0047"
       rpy="0.0000 0.0000 0.0000"
       ixx="0.0000043" ixy="0.0" ixz="0.0"
-      iyy="0.0000043" iyz="0.0" izz="0.0000080"/>
+      iyy="0.0000043" iyz="0.0" izz="0.0000080" />
 
     <xacro:mesh_visual
       name="wheel_left_front"
       mesh="${visual_mesh_dir}/Part__Feature075.019.dae"
       material="Part__Feature074.001"
       xyz="-0.0001 0.0001 0.0053"
-      rpy="-1.5708 0.0000 0.0000"/>
+      rpy="-1.5708 0.0000 0.0000" />
   </link>
 
-<!-- Joints -->
+  <!-- Joints -->
   <xacro:fixed_joint
     name="base_to_body"
     parent="base_link"
     child="shell_link"
     xyz="0 0 0"
-    rpy="0 0 0"/>
+    rpy="0 0 0" />
 
   <xacro:revolute_joint
     name="neck_link_joint"
@@ -351,7 +355,7 @@
     rpy="0.0000 0.0000 0.0000"
     axis="0.0000 0.0000 1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000"/>
+    effort="0.0000" velocity="0.0000" />
 
   <xacro:revolute_joint
     name="neck_holder_link_joint"
@@ -361,7 +365,7 @@
     rpy="-0.0000 1.5708 -0.0000"
     axis="0.0000 0.0000 1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000"/>
+    effort="0.0000" velocity="0.0000" />
 
   <xacro:revolute_joint
     name="camera_link_joint"
@@ -371,7 +375,7 @@
     rpy="1.9752 -1.5708 -0.4044"
     axis="0.0000 0.0000 1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000"/>
+    effort="0.0000" velocity="0.0000" />
 
   <xacro:revolute_joint
     name="feet_right_rear_link_joint"
@@ -381,7 +385,7 @@
     rpy="-1.5708 0.0000 0.0000"
     axis="0.0000 0.0000 -1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000"/>
+    effort="0.0000" velocity="0.0000" />
 
   <xacro:continuous_joint
     name="wheel_right_rear_link_joint"
@@ -390,7 +394,7 @@
     xyz="0.0655 -0.0000 0.0483"
     rpy="-0.0000 0.0000 0.0000"
     axis="0.0000 0.0000 -1.0000"
-    effort="0.0000" velocity="0.0000"/>
+    effort="10.0000" velocity="20.0000" />
 
   <xacro:revolute_joint
     name="feet_left_rear_link_joint"
@@ -400,7 +404,7 @@
     rpy="1.5708 0.0000 -0.0000"
     axis="0.0000 0.0000 1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000"/>
+    effort="0.0000" velocity="0.0000" />
 
   <xacro:continuous_joint
     name="wheel_left_rear_link_joint"
@@ -409,7 +413,7 @@
     xyz="0.0656 0.0001 0.0488"
     rpy="0.0000 0.0000 -0.0000"
     axis="0.0000 0.0000 1.0000"
-    effort="0.0000" velocity="0.0000"/>
+    effort="10.0000" velocity="20.0000" />
 
   <xacro:revolute_joint
     name="feet_left_front_link_joint"
@@ -419,7 +423,7 @@
     rpy="1.5708 0.0000 -0.0000"
     axis="0.0000 0.0000 1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000"/>
+    effort="0.0000" velocity="0.0000" />
 
   <xacro:continuous_joint
     name="wheel_left_front_link_joint"
@@ -428,7 +432,7 @@
     xyz="-0.0655 -0.0002 0.0488"
     rpy="0.0000 0.0000 0.0000"
     axis="0.0000 0.0000 1.0000"
-    effort="0.0000" velocity="0.0000"/>
+    effort="10.0000" velocity="20.0000" />
 
   <xacro:revolute_joint
     name="feet_right_front_link_joint"
@@ -438,7 +442,7 @@
     rpy="-1.5708 0.0000 -0.0000"
     axis="0.0000 0.0000 -1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000"/>
+    effort="0.0000" velocity="0.0000" />
 
   <xacro:continuous_joint
     name="wheel_right_front_link_joint"
@@ -447,36 +451,36 @@
     xyz="-0.0655 0.0002 0.0488"
     rpy="-0.0000 -0.0000 -0.0000"
     axis="0.0000 0.0000 -1.0000"
-    effort="0.0000" velocity="0.0000"/>
+    effort="10.0000" velocity="20.0000" />
 
-<!-- Materiales -->
+  <!-- Materiales -->
   <material name="gray">
-    <color rgba="0.5 0.5 0.5 1.0"/>
+    <color rgba="0.5 0.5 0.5 1.0" />
   </material>
 
   <material name="Material.001">
-    <color rgba="0.1804 0.0000 0.0000 1.0000"/>
+    <color rgba="0.1804 0.0000 0.0000 1.0000" />
   </material>
   <material name="Material.003">
-    <color rgba="0.0000 0.0000 0.1098 1.0000"/>
+    <color rgba="0.0000 0.0000 0.1098 1.0000" />
   </material>
   <material name="Part__Feature001.011">
-    <color rgba="0.0000 0.5961 0.0078 1.0000"/>
+    <color rgba="0.0000 0.5961 0.0078 1.0000" />
   </material>
   <material name="Part__Feature074.001">
-    <color rgba="0.2941 0.2745 0.0000 1.0000"/>
+    <color rgba="0.2941 0.2745 0.0000 1.0000" />
   </material>
   <material name="bones.001">
-    <color rgba="0.0000 0.0000 0.0000 1.0000"/>
+    <color rgba="0.0000 0.0000 0.0000 1.0000" />
   </material>
   <material name="green">
-    <color rgba="0.0902 0.0000 0.0863 1.0000"/>
+    <color rgba="0.0902 0.0000 0.0863 1.0000" />
   </material>
   <material name="purple">
-    <color rgba="0.0314 0.0039 0.0275 1.0000"/>
+    <color rgba="0.0314 0.0039 0.0275 1.0000" />
   </material>
   <material name="wheels_material">
-    <color rgba="0.0000 0.0000 0.0000 1.0000"/>
+    <color rgba="0.0000 0.0000 0.0000 1.0000" />
   </material>
 
 </robot>
