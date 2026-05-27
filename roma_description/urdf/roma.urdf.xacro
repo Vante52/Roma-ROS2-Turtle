@@ -65,15 +65,23 @@
     </joint>
   </xacro:macro>
 
+  <xacro:macro name="box_collision" params="name size xyz rpy">
+    <collision name="${name}">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <geometry>
+        <box size="${size}" />
+      </geometry>
+    </collision>
+  </xacro:macro>
   <!-- Links -->
   <link name="base_link" />
 
   <link name="shell_link">
-    <xacro:mesh_collision
+    <xacro:box_collision
       name="shell_collision"
-      mesh="${collision_mesh_dir}/Part__Feature001.010.stl"
       xyz="0.0000 0.0000 0.0000"
-      rpy="0.0000 0.0000 0.0000" />
+      rpy="0.0000 0.0000 0.0300"
+      size="0.21 0.12 0.04" />
 
     <xacro:link_inertial
       mass="0.5000"
@@ -377,15 +385,15 @@
     lower="-3.1400" upper="3.1400"
     effort="0.0000" velocity="0.0000" />
 
-  <xacro:revolute_joint
+  <xacro:fixed_joint
     name="feet_right_rear_link_joint"
     parent="shell_link"
     child="feet_right_rear_link"
     xyz="0.0476 0.0521 -0.0565"
-    rpy="-1.5708 0.0000 0.0000"
-    axis="0.0000 0.0000 -1.0000"
+    rpy="-1.5708 0.0000 0.0000" />
+  <!-- axis="0.0000 0.0000 -1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000" />
+    effort="0.0000" velocity="0.0000"  -->
 
   <xacro:continuous_joint
     name="wheel_right_rear_link_joint"
@@ -396,15 +404,15 @@
     axis="0.0000 0.0000 -1.0000"
     effort="10.0000" velocity="20.0000" />
 
-  <xacro:revolute_joint
+  <xacro:fixed_joint
     name="feet_left_rear_link_joint"
     parent="shell_link"
     child="feet_left_rear_link"
     xyz="0.0476 -0.0522 -0.0565"
-    rpy="1.5708 0.0000 -0.0000"
-    axis="0.0000 0.0000 1.0000"
+    rpy="1.5708 0.0000 -0.0000" />
+  <!-- axis="0.0000 0.0000 1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000" />
+    effort="0.0000" velocity="0.0000"  -->
 
   <xacro:continuous_joint
     name="wheel_left_rear_link_joint"
@@ -415,15 +423,15 @@
     axis="0.0000 0.0000 1.0000"
     effort="10.0000" velocity="20.0000" />
 
-  <xacro:revolute_joint
+  <xacro:fixed_joint
     name="feet_left_front_link_joint"
     parent="shell_link"
     child="feet_left_front_link"
     xyz="-0.0479 -0.0522 -0.0565"
-    rpy="1.5708 0.0000 -0.0000"
-    axis="0.0000 0.0000 1.0000"
+    rpy="1.5708 0.0000 -0.0000" />
+  <!-- axis="0.0000 0.0000 1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000" />
+    effort="0.0000" velocity="0.0000"  -->
 
   <xacro:continuous_joint
     name="wheel_left_front_link_joint"
@@ -434,15 +442,15 @@
     axis="0.0000 0.0000 1.0000"
     effort="10.0000" velocity="20.0000" />
 
-  <xacro:revolute_joint
+  <xacro:fixed_joint
     name="feet_right_front_link_joint"
     parent="shell_link"
     child="feet_right_front_link"
     xyz="-0.0479 0.0522 -0.0565"
-    rpy="-1.5708 0.0000 -0.0000"
-    axis="0.0000 0.0000 -1.0000"
+    rpy="-1.5708 0.0000 -0.0000" />
+  <!-- axis="0.0000 0.0000 -1.0000"
     lower="-3.1400" upper="3.1400"
-    effort="0.0000" velocity="0.0000" />
+    effort="0.0000" velocity="0.0000"  -->
 
   <xacro:continuous_joint
     name="wheel_right_front_link_joint"
@@ -453,34 +461,43 @@
     axis="0.0000 0.0000 -1.0000"
     effort="10.0000" velocity="20.0000" />
 
-  <!-- Materiales -->
-  <material name="gray">
-    <color rgba="0.5 0.5 0.5 1.0" />
-  </material>
+  <!-- ===== Gazebo Plugins ===== -->
+  <!-- Plugin 1: Differential Drive-->
+  <gazebo>
+    <plugin filename="gz-sim-diff-drive-system"
+      name="gz::sim::systems::DiffDrive">
+      <!-- Ruedas izquierdas -->
+      <left_joint>wheel_left_front_link_joint</left_joint>
+      <left_joint>wheel_left_rear_link_joint</left_joint>
+      <!-- Ruedas derechas -->
+      <right_joint>wheel_right_front_link_joint</right_joint>
+      <right_joint>wheel_right_rear_link_joint</right_joint>
+      <!-- Geometría del robot -->
+      <wheel_separation>0.1048</wheel_separation>
+      <wheel_radius>0.020</wheel_radius>
+      <!-- Tópicos -->
+      <topic>cmd_vel</topic>
+      <odom_topic>odom</odom_topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <tf_topic>/tf</tf_topic>
+    </plugin>
+  </gazebo>
 
-  <material name="Material.001">
-    <color rgba="0.1804 0.0000 0.0000 1.0000" />
-  </material>
-  <material name="Material.003">
-    <color rgba="0.0000 0.0000 0.1098 1.0000" />
-  </material>
-  <material name="Part__Feature001.011">
-    <color rgba="0.0000 0.5961 0.0078 1.0000" />
-  </material>
-  <material name="Part__Feature074.001">
-    <color rgba="0.2941 0.2745 0.0000 1.0000" />
-  </material>
-  <material name="bones.001">
-    <color rgba="0.0000 0.0000 0.0000 1.0000" />
-  </material>
-  <material name="green">
-    <color rgba="0.0902 0.0000 0.0863 1.0000" />
-  </material>
-  <material name="purple">
-    <color rgba="0.0314 0.0039 0.0275 1.0000" />
-  </material>
-  <material name="wheels_material">
-    <color rgba="0.0000 0.0000 0.0000 1.0000" />
-  </material>
+  <!-- Plugin 2: Publicar estado de joints -->
+  <gazebo>
+    <plugin filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <topic>joint_states</topic>
+      <left_joint>wheel_left_front_link_joint</left_joint>
+      <left_joint>wheel_left_rear_link_joint</left_joint>
+      <!-- Ruedas derechas -->
+      <right_joint>wheel_right_front_link_joint</right_joint>
+      <right_joint>wheel_right_rear_link_joint</right_joint>
+    </plugin>
+  </gazebo>
+
+  <xacro:include filename="$(find roma_gazebo)/urdf/robot_material_support.xacro" />
 
 </robot>
