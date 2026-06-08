@@ -1,0 +1,32 @@
+slam_toolbox:
+  ros__parameters:
+    # Plugin y modo (online = en tiempo real, async = sin bloquear el hilo principal)
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_preconditioner: SCHUR_JACOBI
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+    ceres_dogleg_type: TRADITIONAL_DOGLEG
+    ceres_loss_function: None
+
+    # Frames del robot - deben coincidir con tu TF tree
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_link
+    scan_topic: /scan
+
+    # Modo de operación
+    mode: mapping  # 'mapping' para crear mapa, 'localization' para usarlo después
+
+    # Parámetros de rendimiento (más bajo = más rápido pero menos preciso)
+    resolution: 0.05       # Cada celda del mapa mide 5cm
+    max_laser_range: 3.5   # Igual que el del sensor
+    minimum_travel_distance: 0.05  # Actualizar mapa cada 5cm de movimiento
+    minimum_travel_heading: 0.1    # cada ~6 grados de giro
+
+    # No usar la pose inicial de TF (dejar que SLAM la calcule)
+    use_scan_matching: true
+    use_scan_barycenter: true
+
+    # Guardar/cargar mapas
+    map_file_name: ""
+    map_start_at_dock: true
